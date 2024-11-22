@@ -1,10 +1,12 @@
+package pokemonCatcher;
+
 import java.awt.Point;
 import java.util.HashSet;
 
 public class Ash{
-    int pokemonCounter;
-    Point currentHouse;
-    HashSet<Point> seenHouses;
+    private int pokemonCounter;
+    private Point currentHouse;
+    private HashSet<Point> seenHouses;
 
     public Ash(){
         this.pokemonCounter = 1;
