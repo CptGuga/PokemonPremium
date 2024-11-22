@@ -1,5 +1,5 @@
 
-package pokemonCatcher;
+package pokemoncatcher;
 
 import java.util.Scanner;
 
@@ -13,9 +13,11 @@ public class PokemonCatcher {
         String cardinalPath = scanner.next();
 
         int totalSteps = cardinalPath.length();
+        System.out.println(totalSteps);
 
         for (int i = 0; i < totalSteps; i++){
             char nextDirection = cardinalPath.charAt(i);
+            System.out.println(nextDirection);
             switch (nextDirection) {
                 case 'N':
                     ash.moveNorth();

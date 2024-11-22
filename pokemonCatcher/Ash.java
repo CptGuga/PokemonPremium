@@ -1,4 +1,4 @@
-package pokemonCatcher;
+package pokemoncatcher;
 
 import java.awt.Point;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ public class Ash{
         this.pokemonCounter = 1;
         this.currentHouse = new Point(0,0);
         this.seenHouses = new HashSet<Point>();
-        seenHouses.add(this.currentHouse);
+        seenHouses.add(new Point(this.currentHouse));
     }
 
     public int getPokemonCounter(){
@@ -20,29 +20,37 @@ public class Ash{
     }
 
     public void moveNorth(){
-        this.currentHouse.translate(0, 1);
-        catchPokemon();
+        moveGeneric(0, 1);
     }
 
     public void moveSouth(){
-        this.currentHouse.translate(0, -1);
-        catchPokemon();
+        moveGeneric(0, -1);
     }
 
     public void moveEast(){
-        this.currentHouse.translate(1, 0);
-        catchPokemon();
+        moveGeneric(1, 0);
     }
 
     public void moveWest(){
-        this.currentHouse.translate(-1, 0);
+        moveGeneric(-1, 0);
+    }
+
+    private void moveGeneric(int x, int y){
+        Point newHouse = new Point(currentHouse);
+        newHouse.translate(x, y);
+        currentHouse = newHouse;
         catchPokemon();
+        seenHouses.add(currentHouse);
     }
 
     private void catchPokemon(){
         boolean pokemonPresent = !seenHouses.contains(currentHouse);
+        System.out.println(pokemonPresent);
+        System.out.println(currentHouse);
+        System.out.println(seenHouses);
         if (pokemonPresent){
             pokemonCounter++;
+
         }
     }
 }
