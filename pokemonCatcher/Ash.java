@@ -3,54 +3,55 @@ package pokemoncatcher;
 import java.awt.Point;
 import java.util.HashSet;
 
-public class Ash{
+public class Ash {
+
     private int pokemonCounter;
     private Point currentHouse;
-    private HashSet<Point> seenHouses;
+    private HashSet<Point> visitedHouses;
 
-    public Ash(){
+    public Ash() {
         this.pokemonCounter = 1;
         this.currentHouse = new Point(0,0);
-        this.seenHouses = new HashSet<Point>();
-        seenHouses.add(new Point(this.currentHouse));
+        this.visitedHouses = new HashSet<Point>();
+        visitedHouses.add(new Point(this.currentHouse));
     }
 
-    public int getPokemonCounter(){
+    public int traversePath(String path) {
+        int totalSteps = path.length();
+        for (int i = 0; i < totalSteps; i++){
+            char nextDirection = path.charAt(i);
+            switch (nextDirection) {
+                case 'N':
+                    move(0,1);
+                    break;
+                case 'S':
+                    move(0,-1);
+                    break;
+                case 'E':
+                    move(1,0);
+                    break;
+                case 'O':
+                    move(-1,0);
+                    break;
+                default:
+                    return -1;
+            }
+        }
         return pokemonCounter;
     }
 
-    public void moveNorth(){
-        moveGeneric(0, 1);
-    }
-
-    public void moveSouth(){
-        moveGeneric(0, -1);
-    }
-
-    public void moveEast(){
-        moveGeneric(1, 0);
-    }
-
-    public void moveWest(){
-        moveGeneric(-1, 0);
-    }
-
-    private void moveGeneric(int x, int y){
+    private void move(int x, int y) {
         Point newHouse = new Point(currentHouse);
         newHouse.translate(x, y);
         currentHouse = newHouse;
-        catchPokemon();
-        seenHouses.add(currentHouse);
+        visitHouse();
+        visitedHouses.add(currentHouse);
     }
 
-    private void catchPokemon(){
-        boolean pokemonPresent = !seenHouses.contains(currentHouse);
-        System.out.println(pokemonPresent);
-        System.out.println(currentHouse);
-        System.out.println(seenHouses);
+    private void visitHouse() {
+        boolean pokemonPresent = !visitedHouses.contains(currentHouse);
         if (pokemonPresent){
             pokemonCounter++;
-
         }
     }
 }
